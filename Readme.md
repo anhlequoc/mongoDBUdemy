@@ -19,3 +19,11 @@ Mongooes - is ORM or OTM
 ![Mongo - Multiple Databases In One Instance](https://i.imgur.com/rHpIJ3Y.png)
 
 - In a specified database, there are **collections** that are used to store data. For example: collection of books, collections of states - stores different type of data
+
+## Section 17
+- model: a class in database (like user), model & class giống nhau, có thể dùng interchangeably: user class & user model - represet for entire collection of data that's sitting inside of our database
+- collection: 
+- schema: is a list of properties that are expected that model should have
+
+## Section 19
+How mocha works:

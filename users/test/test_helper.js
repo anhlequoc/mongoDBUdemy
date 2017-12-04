@@ -11,3 +11,10 @@ mongoose.connection
         console.warn("warning: ", error);
     });
 // 'open', 'error' are some particalur events used in mongo
+
+//flush test db before each test
+beforeEach((done) => {
+    mongoose.connection.collections.users.drop(() => {
+        done(); // a signal to mocha that can go ahead and start test
+    });
+});
