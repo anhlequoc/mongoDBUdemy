@@ -25,5 +25,6 @@ Mongooes - is ORM or OTM
 - collection: 
 - schema: is a list of properties that are expected that model should have
 
-## Section 19
-How mocha works:
+## Lecture 25
+- isNew property: isNew là true nếu chưa save vào mongodb, sau khi save rồi thì sẽ là false
+- hàm assert luôn nhận giá trị true để mocha có thể run tiếp câu lệnh dưới
