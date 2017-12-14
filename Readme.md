@@ -28,3 +28,11 @@ Mongooes - is ORM or OTM
 ## Lecture 25
 - isNew property: isNew là true nếu chưa save vào mongodb, sau khi save rồi thì sẽ là false
 - hàm assert luôn nhận giá trị true để mocha có thể run tiếp câu lệnh dưới
+
+## Lecture 30
+- nodemon command to run with mocha
+```
+ "scripts": {
+    "test": "nodemon --exec \"mocha -R min\""
+  },
+```
