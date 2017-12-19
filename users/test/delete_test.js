@@ -10,26 +10,40 @@ describe('Deleting user...', () => {
       .then(() => done());
   });
 
-  it('model instance remove', () => {
+  it('model instance remove', (done) => {
     joe.remove() //mất thời gian database trả về rồi mới remove xong
       .then(() => User.findOne({name: "joe"}))
+      .then((user) => { //chờ db trả về kết quả rồi mới thực hiện tiếp đc
+        assert(user === null);
+        done();
+      });
+  });
+
+  it('class method remove', (done) => {
+    //useful: remove a bunch of records that match criteria
+    User.remove({ name: "joe" })
+      .then(() => User.findOne( { name: "joe"}))
       .then((user) => {
         assert(user === null);
         done();
-      })
+      });
   });
 
-  it('class method remove', () => {
-
+  it('class method findAndRemove', (done) => {
+    User.findOneAndRemove({ name: 'joe'})
+      .then(() => User.findOne( { name: "joe"}))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
   });
 
-  it('class method findAndRemove', () => {
-
+  it('class method findByIdAndRemove', (done) => {
+    User.findByIdAndRemove(joe._id)
+      .then(() => User.findOne( { name: "joe"}))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
   });
-
-  it('class method findByIdAndRemove', () => {
-
-  });
-
-
 });
