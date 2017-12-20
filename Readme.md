@@ -36,3 +36,6 @@ Mongooes - is ORM or OTM
     "test": "nodemon --exec \"mocha -R min\""
   },
 ```
+
+## Lecture 36
+- có thể cân nhắc tách phần set (update) attribute ra riêng 1 hàm, xong rồi mới gọi hàm save(), tránh đụng vào database nhiều lần như trong file code
