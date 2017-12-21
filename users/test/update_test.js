@@ -11,27 +11,25 @@ describe('updating user...', () => {
   });
 
   it('instance type update by using set and save method', (done) => {
-    jane.set('name', 'janey'); // just change in memory, not change in db yet
-    jane.save()
-      .then(() => User.find({})) //find all records in collection
-      .then((users) => {      
-        assert(users.length === 1);
-        assert(users[0].name === 'janey');
-        done();
-      });
-      //console.log(jane);
+    jane.set('name', 'janeeee'); // just change in memory, not change in db yet
+    assertName(jane.save(), done);
   });
 
   //instance update
   it('An instance is updated by using update method', (done) => {
-    jane.update({name: 'janeeee'})
-      .then(() => User.find({})) //find all records in collection
+    assertName(jane.update({name: "janeeee"}), done);
+    // chú ý ở hàm update, jane ở local sẽ không được lấy name mới là janeeee, mà vẫn giữ tên là jane, khác với set & save ở trên
+  });
+
+  function assertName(operation, done) {
+    operation
+      .then(() => User.find({}))
       .then((users) => {
-        console.log("local: " + jane._id + "-" + jane.name); //jane ở local chưa được update theo tên mới nên khác với jane ở server
-        console.log("server: " + users[0]._id + "-" + users[0].name);
         assert(users.length === 1);
+        console.log(jane.name);
+        console.log(users[0].name);
         assert(users[0].name === "janeeee");
         done();
       });
-  });
+  }
 });
