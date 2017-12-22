@@ -39,3 +39,34 @@ Mongooes - is ORM or OTM
 
 ## Lecture 36
 - có thể cân nhắc tách phần set (update) attribute ra riêng 1 hàm, xong rồi mới gọi hàm save(), tránh đụng vào database nhiều lần như trong file code
+
+## Lecture 39
+> where to start learning a lot more about performance inside of MongoDB
+
+- Các lecture trước: lấy data từ mongodb về server, update data rồi gửi lại lên cho mongodb
+- từ lecture 39: từ server gửi lệnh thẳng vào mongodb để update collections ở đó, không lấy về server nữa
+
+![Send command direct to MongoDB from server](https://i.imgur.com/izBis99.png)
+
+## Lecture 41
+Working with Mongo, via Mongoose
+![Working with Mongo via Mongoose](https://i.imgur.com/fDnmpuO.png)
+
+## Lecture 42
+- validateSync(): return an object
+- nếu cần làm việc với db, webservice để validate thì dùng callback:
+
+```javascript
+validate((validationResult) => {...
+});
+```
+
+## Lecture 43
+
+```javascript
+//1 attribute của object property trong model class, dùng cho validate những thứ phức tạp
+validate: {
+      validator: (name) => name.length > 2,
+      message: "Name should be longer than 2!"
+    }
+```

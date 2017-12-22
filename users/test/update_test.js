@@ -5,7 +5,7 @@ describe('updating user...', () => {
   let jane;
 
   beforeEach((done) => {
-    jane = new User({name: 'jane'});
+    jane = new User({name: 'jane', postCount: 2});
     jane.save()
       .then(() => done());
   });
@@ -15,8 +15,8 @@ describe('updating user...', () => {
       .then(() => User.find({}))
       .then((users) => {
         assert(users.length === 1);
-        console.log(jane.name);
-        console.log(users[0].name);
+        // console.log(jane.name);
+        // console.log(users[0].name);
         assert(users[0].name === "janeeee");
         done();
       });
@@ -51,6 +51,18 @@ describe('updating user...', () => {
       User.findByIdAndUpdate(jane._id, {name: "janeeee"}),
       done
     );
+  });
+
+
+  it('A model increment directly user in database postcount by 10', (done) => {
+    //gửi lệnh trực tiếp lên db, không lưu user xuống server
+    User.update({name: "jane"}, {$inc: {postCount: 10}}) //tìm tất cả object có name là "jane", cộng attribute postCount của nó thêm 10
+      .then(() => User.findOne({name: "jane"}))
+      .then((user) => {
+        console.log(user.postCount);
+        assert(user.postCount === 12); //không dùng jane.postCount vì object này nằm ở server, không phải lấy trực tiếp từ mongodb
+        done();
+      })
   });
 
 });
