@@ -9,10 +9,11 @@ const UserSchema = new Schema ({
       validator: (name) => name.length > 2,
       message: "Name should be longer than 2 characters"
     },
-    required: [true, "Name is required!"]
+    required: [true, "Name is required!"],
   },
   // postCount: Number, - chuyển postCount sang Virtual Type
-  posts: [PostSchema] //represent for 1 - n relationship 
+  posts: [PostSchema], //represent for 1 - n relationship 
+  likes: Number
 });
 
 UserSchema.virtual('postCount').get(function() {      

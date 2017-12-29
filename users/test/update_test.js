@@ -5,7 +5,7 @@ describe('updating user...', () => {
   let jane;
 
   beforeEach((done) => {
-    jane = new User({name: 'jane', postCount: 2});
+    jane = new User({name: 'jane', likes: 2});
     jane.save()
       .then(() => done());
   });
@@ -54,12 +54,14 @@ describe('updating user...', () => {
   });
 
   //postpone test case này lại sai khi khai báo postCount là virtual type của user trong UserSchema
-  xit('A model increment directly user in database postcount by 10', (done) => {
-    //gửi lệnh trực tiếp lên db, không lưu user xuống server
-    User.update({name: "jane"}, {$inc: {postCount: 10}}) //tìm tất cả object có name là "jane", cộng attribute postCount của nó thêm 10
+  it('A model increment directly user in database "likes" by 10', (done) => {
+    //gửi lệnh trực tiếp lên db, không lưu user xuống server    
+    
+    User.update({name: "jane"}, {$inc: {likes: 10}}) //tìm tất cả object có name là "jane", cộng attribute likes của nó thêm 10
       .then(() => User.findOne({name: "jane"}))
       .then((user) => {        
-        assert(user.postCount === 12); //không dùng jane.postCount vì object này nằm ở server, không phải lấy trực tiếp từ mongodb
+        console.log(user);
+        assert(user.likes === 12); //không dùng jane.postCount vì object này nằm ở server, không phải lấy trực tiếp từ mongodb
         done();
       })
   });
