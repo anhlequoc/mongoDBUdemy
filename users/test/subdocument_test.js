@@ -15,4 +15,23 @@ describe('Subdocument', () => {
         done();
       })
   });
+
+  it('should allow adding post to current user', (done) => {
+    const jane = new User({
+      name: 'jane',
+      posts: []
+    });
+
+    jane.save()
+      .then(() => User.findOne({name: 'jane'}) )
+      .then((user) => {
+        user.posts.push({ title: 'new post' });
+        return user.save(); // dùng lệnh return để buộc js có kết quả từ hàm user.save() rồi mới chạy dòng lệnh tiếp theo
+      })
+      .then(() => User.findOne({ name: 'jane'}) )
+      .then((user) => {        
+        assert(user.posts[0].title === 'new post');
+        done();
+      })
+  });
 });

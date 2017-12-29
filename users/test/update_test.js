@@ -58,8 +58,7 @@ describe('updating user...', () => {
     //gửi lệnh trực tiếp lên db, không lưu user xuống server
     User.update({name: "jane"}, {$inc: {postCount: 10}}) //tìm tất cả object có name là "jane", cộng attribute postCount của nó thêm 10
       .then(() => User.findOne({name: "jane"}))
-      .then((user) => {
-        console.log(user.postCount);
+      .then((user) => {        
         assert(user.postCount === 12); //không dùng jane.postCount vì object này nằm ở server, không phải lấy trực tiếp từ mongodb
         done();
       })
