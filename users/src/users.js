@@ -11,8 +11,12 @@ const UserSchema = new Schema ({
     },
     required: [true, "Name is required!"]
   },
-  postCount: Number,
+  // postCount: Number, - chuyển postCount sang Virtual Type
   posts: [PostSchema] //represent for 1 - n relationship 
+});
+
+UserSchema.virtual('postCount').get(function() {      
+  return this.posts.length; //this lúc này trỏ vào user, nếu dùng arrow function, this sẽ trỏ vào object hiện tại chứa user
 });
 
 const User = mongoose.model("user", UserSchema);

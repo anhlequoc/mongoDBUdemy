@@ -53,8 +53,8 @@ describe('updating user...', () => {
     );
   });
 
-
-  it('A model increment directly user in database postcount by 10', (done) => {
+  //postpone test case này lại sai khi khai báo postCount là virtual type của user trong UserSchema
+  xit('A model increment directly user in database postcount by 10', (done) => {
     //gửi lệnh trực tiếp lên db, không lưu user xuống server
     User.update({name: "jane"}, {$inc: {postCount: 10}}) //tìm tất cả object có name là "jane", cộng attribute postCount của nó thêm 10
       .then(() => User.findOne({name: "jane"}))
@@ -65,3 +65,5 @@ describe('updating user...', () => {
   });
 
 });
+
+//dùng function() {} chứ không dùng arrow function để this trỏ vào đúng user có attribute là posts, nếu dùng 
