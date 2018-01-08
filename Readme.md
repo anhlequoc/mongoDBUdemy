@@ -70,3 +70,36 @@ validate: {
       message: "Name should be longer than 2!"
     }
 ```
+
+## Lecture 45
+- không tạo post model mà chỉ tạo post schema bên trong user model do post luôn đi với user, và không có post nào đứng riêng lẻ
+- chỉ tạo mongoose model khi cần trao đổi với collection trong db
+
+## Lecture 46:
+- represent for relationship 1 - n between 2 schemas:
+
+```javascript
+const UserSchema = new Schema ({
+  name: {
+    type: String,
+    validate: {
+      validator: (name) => name.length > 2,
+      message: "Name should be longer than 2 characters"
+    },
+    required: [true, "Name is required!"]
+  },
+  postCount: Number,
+  posts: [PostSchema] //represent for 1 - n relationship 
+});
+```
+
+## Lecture 48
+- khi thay đổi 1 attribute của 1 record trong collection thì cần save record đó, không phải search attribute (theo ví dụ - dùng user.save())
+
+## lecture 50 - Virtual Type
+- attribute postCount hiện đang fix cứng và ko liên quan gì đến attribute posts của existing record
+- muốn postCount là số number của posts[], dùng Virtual Type
+- Khái niệm Virtual Type / Virtual Property / Virtual Field nghĩa là chỉ một field mà không thực sự được lưu trên MongoDB, nó có thể được lưu ở server, xem hình dưới
+![Virtual Type - postCount](https://i.imgur.com/mQTaivq.png)
+
+- Virtual Type được khai báo ở schema, theo dạng dùng getter và setter ở ES6 (dùng function(), không phải arrow function), mục đích là để bất kỳ khi nào gọi đến attribute kiểu virtual type này, js và mongoose sẽ ko tìm ở result trả về của mongoose nữa, mà sẽ chạy hàm getter, setter ở trên để lấy ra giá trị của attribute đó
