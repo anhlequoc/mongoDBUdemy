@@ -17,6 +17,17 @@ before((done) => {
 
 //flush test db before each test
 beforeEach((done) => {
+    //use ES6 syntax to get collection from db    
+    const {users, blogPosts, comments} = mongoose.connections.collections;
+
+    users.drop(() => {
+        blogPosts.drop(() => {
+            comments.drop(() => {
+                done();
+            });
+        });
+    });
+
     mongoose.connection.collections.users.drop(() => {
         done(); // a signal to mocha that can go ahead and start test
     });
