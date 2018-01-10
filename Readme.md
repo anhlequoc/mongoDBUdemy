@@ -103,3 +103,7 @@ const UserSchema = new Schema ({
 ![Virtual Type - postCount](https://i.imgur.com/mQTaivq.png)
 
 - Virtual Type được khai báo ở schema, theo dạng dùng getter và setter ở ES6 (dùng function(), không phải arrow function), mục đích là để bất kỳ khi nào gọi đến attribute kiểu virtual type này, js và mongoose sẽ ko tìm ở result trả về của mongoose nữa, mà sẽ chạy hàm getter, setter ở trên để lấy ra giá trị của attribute đó
+
+## Lecture 59
+Note:
+  - khi lấy data từ db về, mongoose tự động biến chữ hoa thành chữ thường, do đó blogPosts -> blogposts
