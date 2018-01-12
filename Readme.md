@@ -107,3 +107,52 @@ const UserSchema = new Schema ({
 ## Lecture 59
 Note:
   - khi lấy data từ db về, mongoose tự động biến chữ hoa thành chữ thường, do đó blogPosts -> blogposts
+
+## lecture 60
+code:
+  - association_test.js:
+
+  - todo
+    + beforeEach():
+      setup sample instance and association between instances
+      then save these instances to database, use Promise.all (from ES6)
+      Promise.all([joe.save(), blogPost.save(), comment.save()])
+        .then(() => done());
+
+    +it: saves relation between user and blogpost
+  
+  - it.only: mocha sẽ chỉ chạy test case này (trong trường hợp có vài trăm test case -> save time)
+
+## lecture 61:
+mongodb query: see image
+![MongoDB Query](https://i.imgur.com/O0scTaC.png)
+
+- in previous way, use .exec() instead of .then()
+- để query trả về nhiều data theo mình mong muốn hơn, dùng modifier
+>User.findOne({name: 'joe'}).modifier.then()
+
+- ví dụ: User.findOne({name: 'joe'}).populate('blogPosts').then()
+  + populate: load all blogPosts an user has (blogPosts là attribute dạng array của user)
+
+- Note: mongoose will not let you automatically walk through an association and just recursively load up all the different associated records (tức nó chỉ cho load user và blog post của user, ko load được comment của blog post **của user đó**) nhằm tránh crash
+
+- todo:
+  + user blogpost title is same as title of blogPost instance
+
+## lecture 62:
+- todo:
+  + it should save full relation between user, blogPosts, comments
+    ```javascript
+      .populate({
+        path: 'blogPosts',
+        populate: { /*nghĩa là trong blogPosts, load comments của blogpost ra */
+          path: 'comments',
+          model: 'comment', //model name gắn với blogPosts
+          populate: {
+            path: 'user',
+            model: 'user'
+          }
+        }
+      })
+    ```
+    assert name of each instance (4 assertions)
