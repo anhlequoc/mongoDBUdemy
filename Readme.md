@@ -185,7 +185,7 @@ Nhưng ở file blogPosts.js, nếu sau này cũng cần load module user, sẽ 
 -> bị tình trạng Cyclics requires, application không biết load thằng nào trước khi User require BlogPost và BlogPost require User
 
 - fix: chỉ load module BlogPost khi chạy function của pre middleware
-  const BlogPost = mongoose.model('BlogPost');
+  const BlogPost = mongoose.model('blogPost'); //blogPost la model name
 
 ## lecture 65: 
 ```javascript
@@ -196,3 +196,16 @@ BlogPost.remove({_id: {$in: this.blogPosts} })
 
 ## lecture 66: test pre middleware
 
+## lecture 67: skip and limit
+> skip and limit are two query modifiers for pagination
+![Mongo - Pagination](https://i.imgur.com/D5wQSss.png)
+
+## lecture 68 + 69
+- note:
+```
+Promise.all([a.save(), jane.save(), b.save(), c.save()]) // các user được save cùng lúc nên không biết user nào vào trước, user nào vào sau
+      .then(() => done());
+```      
+- todo:
+  + beforeEach: add 4 users
+  + User.find({}).skip(1).limit(2) -> get 2nd and 3rd users
