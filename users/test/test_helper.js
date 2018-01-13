@@ -17,13 +17,11 @@ before((done) => {
 
 //flush test db before each test
 beforeEach((done) => {
-    //use ES6 syntax to get collection from db    
-    const {users, blogposts, comments} = mongoose.connections.collections;
-
     /**
+    - use ES6 syntax to get collection from db    
     - khi lấy data từ db về, mongoose tự động biến chữ hoa thành chữ thường, do đó blogPosts -> blogposts
-
     */
+    const {users, blogposts, comments} = mongoose.connection.collections;
 
     users.drop(() => {
         blogposts.drop(() => {
