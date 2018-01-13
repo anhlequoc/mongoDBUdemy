@@ -34,7 +34,7 @@ describe('Association Test', () => {
   it('should save all relations between user, blogPost, comment', (done) => {
     User.findOne({name: 'jane'})
       .populate({
-        path: 'blogPosts',
+        path: 'blogPosts', //attribute của object user
         model: 'blogPost',
         populate: { /*nghĩa là trong blogPosts, load comments của blogpost ra */
           path: 'comments',

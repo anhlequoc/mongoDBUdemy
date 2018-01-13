@@ -144,7 +144,7 @@ mongodb query: see image
   + it should save full relation between user, blogPosts, comments
     ```javascript
       .populate({
-        path: 'blogPosts',
+        path: 'blogPosts', //attribute của object user
         populate: { /*nghĩa là trong blogPosts, load comments của blogpost ra */
           path: 'comments',
           model: 'comment', //model name gắn với blogPosts
@@ -156,3 +156,43 @@ mongodb query: see image
       })
     ```
     assert name of each instance (4 assertions)
+
+## lecture 63:
+problem: when user somehow is deleted, what happen with his blog posts and comments?
+solution: his blog posts and comments should be deleted also -> using mongoose middle ware to solve this case
+
+Middleware:
+![Middleware](https://i.imgur.com/a7vb5Us.png)
+
+>middleware piece 1, 2, 3, 4 are functions that execute before and after some distinct events take place with mongoose
+
+2 types of middleware:
+- pre: trước event xảy ra thì làm gì
+- post: sau event xảy ra thì làm gì
+
+## lecture 64: Handling Cyclic Requires
+- todo:
+  + edit user.js to add pre middleware
+  + sẽ cần remove BlogPost của user -> cần load module BlogPost ra
+Như sau:
+```users.js
+  const BlogPost = require('../src/blogPosts');
+```
+Nhưng ở file blogPosts.js, nếu sau này cũng cần load module user, sẽ viết
+```blogPosts.js
+  const User = require('../src/users');
+```
+-> bị tình trạng Cyclics requires, application không biết load thằng nào trước khi User require BlogPost và BlogPost require User
+
+- fix: chỉ load module BlogPost khi chạy function của pre middleware
+  const BlogPost = mongoose.model('BlogPost');
+
+## lecture 65: 
+```javascript
+BlogPost.remove({_id: {$in: this.blogPosts} })
+  .then(() => next());
+//Go through all blog post, lookup the id, if id is in id of this.blogPosts -> remove
+```
+
+## lecture 66: test pre middleware
+
