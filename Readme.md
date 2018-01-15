@@ -22,8 +22,14 @@ Mongooes - is ORM or OTM
 
 ## Section 17
 - model: a class in database (like user), model & class giống nhau, có thể dùng interchangeably: user class & user model - represet for entire collection of data that's sitting inside of our database
-- collection: 
+- mỗi model có 1 schema, list các attributes mà 1 record sẽ có trong collection
 - schema: is a list of properties that are expected that model should have
+
+```javascript
+  //match the file with a model/class in database
+  module.exports = User;
+
+```
 
 ## Lecture 25
 - isNew property: isNew là true nếu chưa save vào mongodb, sau khi save rồi thì sẽ là false
