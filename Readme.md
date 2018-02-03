@@ -215,3 +215,35 @@ Promise.all([a.save(), jane.save(), b.save(), c.save()]) // các user được s
 - todo:
   + beforeEach: add 4 users
   + User.find({}).skip(1).limit(2) -> get 2nd and 3rd users
+
+## lecture 97
+API request:
+![API requet for Uber app](https://i.imgur.com/rtQshIi.png)
+
+## lecture 98
+front-end app: (react, iOS, angular) sends http request to communicate with nodejs/exrepss server
+
+Request Method:
+  - POST: request type (other types: DELETE, PUT, GET... defines the general purpose of request)
+  - User-Agent: type of device sends request
+  - Host: domain of request
+  - content-type: ...
+
+Request Body: contain any information to send from client to request to hanle in server
+
+App Structure:
+![App Structure](https://i.imgur.com/Wb2ONzc.png)
+
+
+## lecture 100: 
+Node vs Express:
+![Node vs Express](https://i.imgur.com/z5SAhas.png)
+
+Express simplifies effort while working with Node. Everything express does, Node can do but it takes a lot of more effort
+
+## lecture 101:
+App model:
+![App Model](https://i.imgur.com/MXDkeXd.png)
+
+## lecture 105:
+Break express into 3 module: Route, Controller, Model for easy manngement
