@@ -234,7 +234,6 @@ Request Body: contain any information to send from client to request to hanle in
 App Structure:
 ![App Structure](https://i.imgur.com/Wb2ONzc.png)
 
-
 ## lecture 100: 
 Node vs Express:
 ![Node vs Express](https://i.imgur.com/z5SAhas.png)
